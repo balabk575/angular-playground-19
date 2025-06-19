@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { PersonalInformationsFormComponent } from "./components/personal-informations-form/personal-informations-form.component";
+import { PRFormComponent } from "./components/pr-form/pr-form.component";
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ButtonModule, PersonalInformationsFormComponent, PRFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

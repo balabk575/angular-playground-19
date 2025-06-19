@@ -1,0 +1,45 @@
+<div class="form-wrapper py-6 px-4 shadow-md rounded-lg bg-white" >
+<h3 class="text-lg font-semibold mb-4">{{formHeading}}</h3>
+  <form [formGroup]="formGroup">
+    <div class="grid grid-cols-3 gap-3">
+      @for (field of formFields; track $index) { @if
+      (field.formControlType === "text") {
+      <div class="flex flex-col gap-2">
+        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <input
+          [formControlName]="field.formControlName"
+          pInputText
+          [id]="field.formControlName"
+        />
+      </div>
+      }@else if (field.formControlType === "number") {
+      <div class="flex flex-col gap-2">
+        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <p-inputnumber
+          [formControlName]="field.formControlName"
+          [id]="field.formControlName"
+        />
+      </div>
+      } @else if (field.formControlType === "priority") {
+      <div class="flex flex-col gap-2">
+        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <p-select
+          [formControlName]="field.formControlName"
+          [options]="field?.options"
+          placeholder="select"
+        />
+      </div>
+      }@else if (field.formControlType === 'Date') {
+      <div class="flex flex-col gap-2">
+        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <p-datepicker
+          class="w-full"
+          fluid="true"
+          [formControlName]="field.formControlName"
+        />
+      </div>
+
+      } }
+    </div>
+  </form>
+  </div>
