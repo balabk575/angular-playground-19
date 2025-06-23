@@ -1,6 +1,7 @@
 <div class="form-wrapper py-6 px-4 shadow-md rounded-lg bg-white" >
 <h3 class="text-lg font-semibold mb-4">{{formHeading}}</h3>
-  <form [formGroup]="formGroup">
+<fieldset [formGroupName]="formName">
+
     <div class="grid grid-cols-3 gap-3">
       @for (field of formFields; track $index) { @if
       (field.formControlType === "text") {
@@ -41,5 +42,8 @@
 
       } }
     </div>
-  </form>
+</fieldset>
+  
+
+ 
   </div>

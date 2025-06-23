@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, Input, SkipSelf } from '@angular/core';
+import { ControlContainer, FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormAttributes } from '../../../models/PR form/personalDetails.model';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -9,12 +9,15 @@ import { SelectModule } from 'primeng/select';
 @Component({
   selector: 'app-form-builder',
   imports: [ReactiveFormsModule, InputTextModule, InputNumberModule, SelectModule, DatePickerModule],
+    viewProviders: [
+    { provide: ControlContainer, useFactory: () => inject(ControlContainer, { skipSelf: true }) }
+  ],
   templateUrl: './form-builder.component.html',
   styleUrl: './form-builder.component.scss'
 })
 export class FormBuilderComponent {
   @Input() formHeading!: string
-  @Input() formGroup!: FormGroup
+  @Input() formName!: string
   @Input() formFields!: FormAttributes[]
 
 }

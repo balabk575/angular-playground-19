@@ -1,10 +1,10 @@
 <div class="PR-form h-auto w-full p-8">
   <h1 class="text-2xl font-semibold mb-2">Create Purchase Requests</h1>
-  <form [formGroup]="PRFormGroup" (ngSubmit)="OnSubmit()">
-      <div class="PR-form-section flex flex-col gap-3">
-          <app-personal-informations-form formGroupName="employeeInfo"></app-personal-informations-form>
-          <app-line-item-form formGroupName="lineItem"></app-line-item-form>
-          <p-button label="submit" type="submit"></p-button>
-        </div>
-    </form>
+  <form [formGroup]="PRFormGroup" (ngSubmit)="onSubmit()">
+    <div class="PR-form-section flex flex-col gap-3">
+      <app-personal-informations-form></app-personal-informations-form>
+      <app-line-item-form></app-line-item-form>
+      <p-button label="submit" type="submit"></p-button>
+    </div>
+  </form>
 </div>
