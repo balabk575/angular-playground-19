@@ -1,45 +1,53 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LineItemFormComponent } from './line-item-form.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+
+
+@Component({
+  selector: 'host-component',
+  template: `<form [formGroup]="form">
+    <app-personal-informations-form formGroupName="personalInfo"></app-personal-informations-form>
+  </form>`,
+  standalone: true,
+  imports: [ReactiveFormsModule, LineItemFormComponent]
+})
+
+class HostComponent {
+  form = new FormGroup({
+    personalInfo: new FormGroup({}) // Add the controls expected by the child component
+  });
+}
 
 describe('LineItemFormComponent', () => {
-  let component: LineItemFormComponent;
-  let fixture: ComponentFixture<LineItemFormComponent>;
-  let fb: FormBuilder
+  let fixture: ComponentFixture<HostComponent>;
+  let hostComponent: HostComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LineItemFormComponent, ReactiveFormsModule]
-    })
-    .compileComponents();
+      imports: [HostComponent], // Only need to import the host
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}),
+            queryParams: of({}),
+            snapshot: {},
+          },
+        }
+      ]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(LineItemFormComponent);
-    component = fixture.componentInstance;
-    fb = TestBed.inject(FormBuilder);
-    component.lineItemForm = fb.group({
-      itemCode: [1],
-      description: ['Test'],
-      Quantity: [10],
-      'estimated unit price': [100],
-      'estimated total': [1000],
-      'delivery date': ['2025-06-30'],
-      'cost center': ['IT'],
-      Justification: ['Test reason']
-    });
-
-    fixture.detectChanges();
-  
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    fixture = TestBed.createComponent(HostComponent);
+    hostComponent = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const personalFormComponent = fixture.debugElement.children[0].componentInstance;
+    expect(personalFormComponent).toBeTruthy();
   });
 });
