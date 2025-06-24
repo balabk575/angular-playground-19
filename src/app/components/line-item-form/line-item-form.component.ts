@@ -13,7 +13,10 @@ import { PRCreationService } from '../../services/pr-creation.service';
   selector: 'app-line-item-form',
   imports: [FormBuilderComponent, ReactiveFormsModule],
   viewProviders: [
-    { provide: ControlContainer, useExisting: FormGroupDirective },
+      {
+  provide: ControlContainer,
+  useFactory: () => inject(ControlContainer, { skipSelf: true }),
+},
   ],
   templateUrl: './line-item-form.component.html',
   styleUrl: './line-item-form.component.scss',

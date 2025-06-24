@@ -1,8 +1,11 @@
 import { Routes } from '@angular/router';
 import { LineItemFormComponent } from './components/line-item-form/line-item-form.component';
-import { PersonalInformationsFormComponent } from './components/personal-informations-form/personal-informations-form.component';
 import { PrFormResolverService } from './services/resolvers/pr-form-resolver.service';
+import { BudgetFormComponent } from './components/budget-form/budget-form.component';
+import { PRFormComponent } from './components/pr-form/pr-form.component';
 
 export const routes: Routes = [
-    {path:'pr-form-details',component:PersonalInformationsFormComponent, resolve:{formData: PrFormResolverService}}
+
+    {path:'',component:PRFormComponent, resolve:{formData: PrFormResolverService}},
+    {path:'pr-form-details',component:BudgetFormComponent, resolve:{formData: PrFormResolverService}}
 ];

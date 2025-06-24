@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, SkipSelf } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -32,7 +32,10 @@ import { ActivatedRoute } from '@angular/router';
     FormBuilderComponent,
   ],
   viewProviders: [
-    { provide: ControlContainer, useExisting: FormGroupDirective },
+    {
+  provide: ControlContainer,
+  useFactory: () => inject(ControlContainer, { skipSelf: true }),
+}
   ],
   templateUrl: './personal-informations-form.component.html',
   styleUrl: './personal-informations-form.component.scss',

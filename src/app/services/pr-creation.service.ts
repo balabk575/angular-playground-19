@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormAttributes } from '../models/PR form/personalDetails.model';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { delay, interval, Observable, of, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class PRCreationService {
   }
 
   dummyFormValue():Observable<any>{
-    return of(this.employeeFormDetailsTestValue)
+    return of(this.employeeFormDetailsTestValue).pipe(delay(5000))
   }
 
 
