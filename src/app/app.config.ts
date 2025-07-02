@@ -5,6 +5,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,17 +13,18 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
-      theme: {
-        preset: Aura,
-        options: {
-          prefix: 'p',
-          darkModeSelector: 'light',
-          cssLayer: {
-            name: 'primeng',
-            order: 'theme, base, primeng',
-          },
+        theme: {
+            preset: Aura,
+            options: {
+                prefix: 'p',
+                darkModeSelector: 'light',
+                cssLayer: {
+                    name: 'primeng',
+                    order: 'theme, base, primeng',
+                },
+            },
         },
-      },
     }),
-  ],
+    provideStore()
+],
 };
