@@ -6,24 +6,26 @@
       @for (field of formFields; track $index) { @if
       (field.formControlType === "text") {
       <div class="flex flex-col gap-2">
-        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <label [for]="'input-' + field.formControlName">{{ field.formControlName }}</label>
         <input
           [formControlName]="field.formControlName"
           pInputText
-          [id]="field.formControlName"
+          [id]="'input-' + field.formControlName"
+          
         />
+        
       </div>
       }@else if (field.formControlType === "number") {
       <div class="flex flex-col gap-2">
-        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <label [for]="'input-' + field.formControlName">{{ field.formControlName }}</label>
         <p-inputnumber
           [formControlName]="field.formControlName"
-          [id]="field.formControlName"
+          [id]="'input-' + field.formControlName"
         />
       </div>
       } @else if (field.formControlType === "priority") {
       <div class="flex flex-col gap-2">
-        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <label [for]="'input-' + field.formControlName">{{ field.formControlName }}</label>
         <p-select
           [formControlName]="field.formControlName"
           [options]="field?.options"
@@ -32,7 +34,7 @@
       </div>
       }@else if (field.formControlType === 'Date') {
       <div class="flex flex-col gap-2">
-        <label [for]="field.formControlName">{{ field.formControlName }}</label>
+        <label [for]="'input-' + field.formControlName">{{ field.formControlName }}</label>
         <p-datepicker
           class="w-full"
           fluid="true"

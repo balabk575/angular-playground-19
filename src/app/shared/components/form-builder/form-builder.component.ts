@@ -1,5 +1,5 @@
 import { Component, inject, Input, SkipSelf } from '@angular/core';
-import { ControlContainer, FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { ControlContainer, FormGroup, FormGroupDirective, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { FormAttributes } from '../../../models/PR form/personalDetails.model';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -13,11 +13,12 @@ import { SelectModule } from 'primeng/select';
     { provide: ControlContainer, useFactory: () => inject(ControlContainer, { skipSelf: true }) }
   ],
   templateUrl: './form-builder.component.html',
-  styleUrl: './form-builder.component.scss'
+  styleUrl: './form-builder.component.scss',
 })
 export class FormBuilderComponent {
   @Input() formHeading!: string
   @Input() formName!: string
   @Input() formFields!: FormAttributes[]
+formGroup: any;
 
 }
