@@ -1,18 +1,21 @@
 module.exports = {
-    preset: 'jest-preset-angular',
-    setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-    testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
-    transform: {
-        '^.+\\.ts$': 'ts-jest', // Only transform .ts files
-    },
-    transformIgnorePatterns: [
-        '/node_modules/(?!flat)/', // Exclude modules except 'flat' from transformation
-    ],
-    reporters: [
+  preset: "jest-preset-angular",
+  setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/dist/"],
+  transform: {
+    "^.+\\.ts$": "ts-jest", // Only transform .ts files
+  },
+  transformIgnorePatterns: [
+    "/node_modules/(?!flat)/", // Exclude modules except 'flat' from transformation
+  ],
+  reporters: [
     "default",
-    ["jest-html-reporter", {
-      "pageTitle": "Test Report",
-      "outputPath": "./test-report.html"
-    }]
-  ]
+    [
+      "jest-html-reporter",
+      {
+        pageTitle: "Test Report",
+        outputPath: "./test-report.html",
+      },
+    ],
+  ],
 };

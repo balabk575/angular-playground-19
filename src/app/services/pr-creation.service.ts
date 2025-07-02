@@ -11,10 +11,10 @@ export class PRCreationService {
   constructor() { }
   employeeFormDetailsTestValue = {
     EmployeeId: 101,
-    RequestorName: 'Bala',
+    "Requestor Name": 'Bala',
     Department: 'Exp eng',
-    RequestDate: '',
-    Priority: 'low'
+    "Request Date": '10072025',
+    Priority: 'high'
   }
 
   formBuilder(formFields: FormAttributes[]): FormGroup{
@@ -28,7 +28,7 @@ export class PRCreationService {
   }
 
   dummyFormValue():Observable<any>{
-    return of(this.employeeFormDetailsTestValue).pipe(delay(5000))
+    return of(this.employeeFormDetailsTestValue).pipe(delay(1000))
   }
 
 

@@ -20,6 +20,8 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 
 @Component({
   selector: 'app-personal-informations-form',
@@ -76,18 +78,33 @@ export class PersonalInformationsFormComponent {
       options: this.priorityLookUp,
     },
   ];
+  formData$: Observable<any>;
+  private destroy$ = new Subject<void>()
+
   get parentFormGroup() {
     return this.parentContainer.control as FormGroup;
   }
   constructor(
     private PRFormService: PRCreationService,
     private controlDir: FormGroupDirective,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private prFormFacade: PrFormFacade
+
+  ) {
+      this.formData$ = this.prFormFacade.formData$;
+  }
 
   ngOnInit() {
     this.parentFormGroup.addControl('employeeInfo',
     this.PRFormService.formBuilder(this.personalInformationFormFields)
     )
+
+  this.formData$.pipe(takeUntil(this.destroy$)).subscribe({
+    next: (data)=>{
+       if (this.parentFormGroup.get('employeeInfo')) {
+      this.parentFormGroup.get('employeeInfo')!.patchValue(data);
+    }
+    }
+  })
   }
 }

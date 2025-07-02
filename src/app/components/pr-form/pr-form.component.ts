@@ -11,6 +11,8 @@ import { PrFormResolverService } from '../../services/resolvers/pr-form-resolver
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
 import { ActivatedRoute } from '@angular/router';
+import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pr-form',
@@ -25,18 +27,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PRFormComponent {
   PRFormGroup!: FormGroup;
+  formData$: Observable<any>;
+  loading$: Observable<boolean>;
   constructor(
     private fb: FormBuilder,
     private PRFormService: PRCreationService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private prFormFacade: PrFormFacade
+  ) {
+      this.formData$ = this.prFormFacade.formData$;
+      this.loading$ = this.prFormFacade.loading$;
+  }
 
   ngOnInit() {
     this.PRFormGroup = this.fb.group({});
-     this.activatedRoute.data.subscribe((response: any) => {
+    this.activatedRoute.data.subscribe((response: any) => {
       console.log('PRODUCT FETCHING', response);
       console.log('PRODUCT FETCHED');
     });
+    this.prFormFacade.loadForm();
+    this.formData$.subscribe({
+      next:res => console.log(res),
+      error: err => console.error(err)
+    })
   }
 
   onSubmit() {
