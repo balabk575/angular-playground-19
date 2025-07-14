@@ -10,7 +10,7 @@ import {
 import { PrFormResolverService } from '../../services/resolvers/pr-form-resolver.service';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,8 @@ import { CommonModule } from '@angular/common';
     LineItemFormComponent,
     ReactiveFormsModule,
     ButtonModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './pr-form.component.html',
   styleUrl: './pr-form.component.scss',
@@ -31,6 +32,11 @@ export class PRFormComponent {
   PRFormGroup!: FormGroup;
   formData$!: Observable<any>;
   loading$!: Observable<boolean>;
+  budgetDetails = {
+    totalBudget: 5000,
+    consumed: 1000,
+    remaining: 4000
+  }
   constructor(
     private fb: FormBuilder,
     private PRFormService: PRCreationService,

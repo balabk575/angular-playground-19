@@ -20,7 +20,7 @@ import { Button } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 
@@ -33,6 +33,7 @@ import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
     SelectModule,
     DatePickerModule,
     FormBuilderComponent,
+    RouterModule
   ],
   viewProviders: [
     {
@@ -46,6 +47,7 @@ import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 export class PersonalInformationsFormComponent {
   parentContainer = inject(ControlContainer);
   priorityLookUp: Priority[] = ['low', 'Medium', 'high'];
+  
   personalInformationFormFields: FormAttributes[] = [
   {
     formControlName: 'employeeId',
