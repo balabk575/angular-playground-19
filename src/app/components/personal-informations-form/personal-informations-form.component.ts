@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import {
   FormAttributes,
+  PRFormDetails,
   Priority,
 } from '../../models/PR form/personalDetails.model';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,7 +21,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 
 @Component({
@@ -46,39 +47,44 @@ export class PersonalInformationsFormComponent {
   parentContainer = inject(ControlContainer);
   priorityLookUp: Priority[] = ['low', 'Medium', 'high'];
   personalInformationFormFields: FormAttributes[] = [
-    {
-      formControlName: 'EmployeeId',
-      formControlType: 'number',
-      isRequired: true,
-      default: 0,
-    },
-    {
-      formControlName: 'Requestor Name',
-      formControlType: 'text',
-      isRequired: true,
-      default: '',
-    },
-    {
-      formControlName: 'Department',
-      formControlType: 'text',
-      isRequired: true,
-      default: '',
-    },
-    {
-      formControlName: 'Request Date',
-      formControlType: 'Date',
-      isRequired: true,
-      default: '',
-    },
-    {
-      formControlName: 'Priority',
-      formControlType: 'priority',
-      isRequired: true,
-      default: 'low',
-      options: this.priorityLookUp,
-    },
-  ];
-  formData$: Observable<any>;
+  {
+    formControlName: 'employeeId',
+    formControlType: 'number',
+    default: 0,
+    isRequired: true,
+    label: 'Employee ID'
+  },
+  {
+    formControlName: 'requestorName',
+    formControlType: 'text',
+    default: '',
+    isRequired: true,
+    label: 'Requestor Name'
+  },
+  {
+    formControlName: 'department',
+    formControlType: 'text',
+    default: '',
+    isRequired: true,
+    label: 'Department'
+  },
+  {
+    formControlName: 'requestDate',
+    formControlType: 'Date',
+    default: '',
+    isRequired: true,
+    label: 'Request Date'
+  },
+  {
+    formControlName: 'priority',
+    formControlType: 'priority',
+    default: 'low',
+    isRequired: true,
+    label: 'Priority',
+    options: this.priorityLookUp
+  }];
+  
+  formData$!: Observable<any>;
   private destroy$ = new Subject<void>()
 
   get parentFormGroup() {
@@ -91,20 +97,28 @@ export class PersonalInformationsFormComponent {
     private prFormFacade: PrFormFacade
 
   ) {
-      this.formData$ = this.prFormFacade.formData$;
+    this.formData$ = this.prFormFacade.formData$;
   }
 
   ngOnInit() {
     this.parentFormGroup.addControl('employeeInfo',
     this.PRFormService.formBuilder(this.personalInformationFormFields)
     )
+    this.PRFormService.subscribeAndPatchForm(this.parentFormGroup, this.formData$, this.destroy$, 'employeeInfo')
 
-  this.formData$.pipe(takeUntil(this.destroy$)).subscribe({
-    next: (data)=>{
-       if (this.parentFormGroup.get('employeeInfo')) {
-      this.parentFormGroup.get('employeeInfo')!.patchValue(data);
-    }
-    }
-  })
+  // this.formData$.pipe(takeUntil(this.destroy$), tap(data => console.log(data)
+  // )).subscribe({
+  //   next: (data: PRFormDetails)=>{
+  //      if (this.parentFormGroup.get('employeeInfo' ) && data) {
+  //     this.parentFormGroup.get('employeeInfo')!.patchValue(data.personalInformation);
+  //   }
+  //   }
+  // })
+  }
+
+    ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
+

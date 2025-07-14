@@ -13,6 +13,7 @@ import { FormBuilderComponent } from '../../shared/components/form-builder/form-
 import { ActivatedRoute } from '@angular/router';
 import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pr-form',
@@ -21,22 +22,22 @@ import { Observable } from 'rxjs';
     LineItemFormComponent,
     ReactiveFormsModule,
     ButtonModule,
+    CommonModule
   ],
   templateUrl: './pr-form.component.html',
   styleUrl: './pr-form.component.scss',
 })
 export class PRFormComponent {
   PRFormGroup!: FormGroup;
-  formData$: Observable<any>;
-  loading$: Observable<boolean>;
+  formData$!: Observable<any>;
+  loading$!: Observable<boolean>;
   constructor(
     private fb: FormBuilder,
     private PRFormService: PRCreationService,
     private activatedRoute: ActivatedRoute,
     private prFormFacade: PrFormFacade
   ) {
-      this.formData$ = this.prFormFacade.formData$;
-      this.loading$ = this.prFormFacade.loading$;
+      
   }
 
   ngOnInit() {
@@ -46,10 +47,8 @@ export class PRFormComponent {
       console.log('PRODUCT FETCHED');
     });
     this.prFormFacade.loadForm();
-    this.formData$.subscribe({
-      next:res => console.log(res),
-      error: err => console.error(err)
-    })
+    this.formData$ = this.prFormFacade.formData$;
+    this.loading$ = this.prFormFacade.loading$;
   }
 
   onSubmit() {

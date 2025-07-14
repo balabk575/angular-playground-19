@@ -5,9 +5,11 @@ import {
   FormGroupDirective,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { FormAttributes } from '../../models/PR form/personalDetails.model';
+import { FormAttributes, PRFormDetails } from '../../models/PR form/personalDetails.model';
 import { FormBuilderComponent } from '../../shared/components/form-builder/form-builder.component';
 import { PRCreationService } from '../../services/pr-creation.service';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 
 @Component({
   selector: 'app-line-item-form',
@@ -26,59 +28,75 @@ export class LineItemFormComponent {
 
 
   lineItemFormFields: FormAttributes[] = [
-    {
-      formControlName: 'itemCode',
-      formControlType: 'number',
-      default: 1,
-      isRequired: true,
-    },
-    {
-      formControlName: 'description',
-      formControlType: 'text',
-      default: '',
-      isRequired: true,
-    },
-    {
-      formControlName: 'Quantity',
-      formControlType: 'number',
-      default: 0,
-      isRequired: true,
-    },
-    {
-      formControlName: 'estimated unit price',
-      formControlType: 'number',
-      default: 0,
-      isRequired: true,
-    },
-    {
-      formControlName: 'estimated total',
-      formControlType: 'number',
-      default: 0,
-      isRequired: true,
-    },
-    {
-      formControlName: 'delivery date',
-      formControlType: 'Date',
-      default: '',
-      isRequired: true,
-    },
-    {
-      formControlName: 'cost center',
-      formControlType: 'text',
-      default: '',
-      isRequired: true,
-    },
-    {
-      formControlName: 'Justification',
-      formControlType: 'text',
-      default: '',
-      isRequired: true,
-    },
-  ];
+  {
+    formControlName: 'itemCode',
+    formControlType: 'number',
+    default: 1,
+    isRequired: true,
+    label: 'Item Code'
+  },
+  {
+    formControlName: 'description',
+    formControlType: 'text',
+    default: '',
+    isRequired: true,
+    label: 'Description'
+  },
+  {
+    formControlName: 'quantity',
+    formControlType: 'number',
+    default: 0,
+    isRequired: true,
+    label: 'Quantity'
+  },
+  {
+    formControlName: 'estimatedUnitPrice',
+    formControlType: 'number',
+    default: 0,
+    isRequired: true,
+    label: 'Estimated Unit Price'
+  },
+  {
+    formControlName: 'estimatedTotal',
+    formControlType: 'number',
+    default: 0,
+    isRequired: true,
+    label: 'Estimated Total'
+  },
+  {
+    formControlName: 'deliveryDate',
+    formControlType: 'Date',
+    default: '',
+    isRequired: true,
+    label: 'Delivery Date'
+  },
+  {
+    formControlName: 'costCenter',
+    formControlType: 'text',
+    default: '',
+    isRequired: true,
+    label: 'Cost Center'
+  },
+  {
+    formControlName: 'justification',
+    formControlType: 'text',
+    default: '',
+    isRequired: true,
+    label: 'Justification'
+  }
+];
+  
+  formData$!: Observable<any>;
+  private destroy$ = new Subject<void>()
+
   constructor(
     private PRFormService: PRCreationService,
-    private controlDir: FormGroupDirective
-  ) {}
+    private controlDir: FormGroupDirective,
+    private prFormFacade: PrFormFacade
+
+  ) {
+    this.formData$ = this.prFormFacade.formData$;
+  }
   get parentFormGroup() {
     return this.parentContainer.control as FormGroup;
   }
@@ -88,5 +106,12 @@ export class LineItemFormComponent {
       'lineItem',
       this.PRFormService.formBuilder(this.lineItemFormFields)
     );
+    this.PRFormService.subscribeAndPatchForm(this.parentFormGroup, this.formData$, this.destroy$, 'lineItem')
+
+  }
+
+    ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
