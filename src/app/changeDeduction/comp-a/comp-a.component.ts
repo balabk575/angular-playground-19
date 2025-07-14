@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { CompBComponent } from '../comp-b/comp-b.component';
 import { Button } from 'primeng/button';
+import { HoverHighlightDirective } from '../../directive/hover-highlight.directive';
 
 @Component({
   selector: 'app-comp-a',
-  imports: [CompBComponent, Button],
+  imports: [CompBComponent, Button, HoverHighlightDirective],
   templateUrl: './comp-a.component.html',
   styleUrl: './comp-a.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
