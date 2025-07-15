@@ -13,7 +13,7 @@ import { HoverHighlightDirective } from '../../directive/hover-highlight.directi
 
 @Component({
   selector: 'app-comp-a',
-  imports: [CompBComponent, Button, HoverHighlightDirective],
+  imports: [CompBComponent],
   templateUrl: './comp-a.component.html',
   styleUrl: './comp-a.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,

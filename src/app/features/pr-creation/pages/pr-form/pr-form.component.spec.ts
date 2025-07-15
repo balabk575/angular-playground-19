@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PRFormComponent } from './pr-form.component';
-import { LineItemFormComponent } from '../line-item-form/line-item-form.component';
-import { PersonalInformationsFormComponent } from '../personal-informations-form/personal-informations-form.component';
+import { LineItemFormComponent } from '../../components/line-item-form/line-item-form.component';
+import { PersonalInformationsFormComponent } from '../../components/personal-informations-form/personal-informations-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { By } from '@angular/platform-browser';
