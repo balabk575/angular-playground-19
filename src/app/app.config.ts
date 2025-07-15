@@ -6,9 +6,9 @@ import Aura from '@primeng/themes/aura';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { prFormReducer } from './store/pr-form/pr-form.reducers';
 import { provideEffects } from '@ngrx/effects';
-import { PrFormEffects } from './store/pr-form/pr-form.effects';
+import { prFormReducer } from './features/pr-creation/store/pr-form/pr-form.reducers';
+import { PrFormEffects } from './features/pr-creation/store/pr-form/pr-form.effects';
 
 
 export const appConfig: ApplicationConfig = {

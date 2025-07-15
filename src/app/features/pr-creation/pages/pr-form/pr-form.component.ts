@@ -11,9 +11,9 @@ import { PrFormResolverService } from '../../services/resolvers/pr-form-resolver
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PrFormFacade } from '../../../../store/pr-form/pr-form.facade';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 
 @Component({
   selector: 'app-pr-form',

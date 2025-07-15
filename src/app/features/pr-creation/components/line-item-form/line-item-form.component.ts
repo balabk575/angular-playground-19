@@ -9,8 +9,7 @@ import { FormAttributes, PRFormDetails } from '../../models/PR form/personalDeta
 import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
-import { PrFormFacade } from '../../../../store/pr-form/pr-form.facade';
-
+import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
 @Component({
   selector: 'app-line-item-form',
   imports: [FormBuilderComponent, ReactiveFormsModule],
