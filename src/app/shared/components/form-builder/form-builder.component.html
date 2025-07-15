@@ -1,31 +1,35 @@
-<div class="form-wrapper py-6 px-4 shadow-md rounded-lg bg-white" >
-<h3 class="text-lg font-semibold mb-4">{{formHeading}}</h3>
-<fieldset [formGroupName]="formName">
-
+<div class="form-wrapper py-6 px-4 shadow-md rounded-lg bg-white">
+  <h3 class="text-lg font-semibold mb-4">{{ formHeading }}</h3>
+  <fieldset [formGroupName]="formName">
     <div class="grid grid-cols-3 gap-3">
-      @for (field of formFields; track $index) { @if
-      (field.formControlType === "text") {
+      @for (field of formFields; track $index) { @if (field.formControlType ===
+      "text") {
       <div class="flex flex-col gap-2">
-        <label [for]="'input-' + field.formControlName">{{ field.label }}</label>
+        <label [for]="'input-' + field.formControlName">{{
+          field.label
+        }}</label>
         <input
           [formControlName]="field.formControlName"
           pInputText
           [id]="'input-' + field.formControlName"
-          
         />
-        
       </div>
       }@else if (field.formControlType === "number") {
       <div class="flex flex-col gap-2">
-        <label [for]="'input-' + field.formControlName">{{ field.label }}</label>
+        <label [for]="'input-' + field.formControlName">{{
+          field.label
+        }}</label>
         <p-inputnumber
           [formControlName]="field.formControlName"
           [id]="'input-' + field.formControlName"
         />
       </div>
-      } @else if (field.formControlType === "priority") {
+      }
+       @else if (field.formControlType === "priority") {
       <div class="flex flex-col gap-2">
-        <label [for]="'input-' + field.formControlName">{{ field.label }}</label>
+        <label [for]="'input-' + field.formControlName">{{
+          field.label
+        }}</label>
         <p-select
           [formControlName]="field.formControlName"
           [options]="field?.options"
@@ -34,18 +38,22 @@
       </div>
       }@else if (field.formControlType === 'Date') {
       <div class="flex flex-col gap-2">
-        <label [for]="'input-' + field.formControlName">{{ field.label }}</label>
+        <label [for]="'input-' + field.formControlName">{{
+          field.label
+        }}</label>
         <p-datepicker
           class="w-full"
           fluid="true"
           [formControlName]="field.formControlName"
         />
       </div>
-
-      } }
+      }@else if(field.formControlType === 'Button') {
+      <div class="flex flex-col justify-end gap-2">
+        <p-button [label]="field.label" [icon]="field.button?.icon" (onClick)="field.button?.action()"></p-button>
+      </div>
+      }
+     }
+       
     </div>
-</fieldset>
-  
-
- 
-  </div>
+  </fieldset>
+</div>

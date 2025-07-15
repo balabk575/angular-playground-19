@@ -5,10 +5,11 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-form-builder',
-  imports: [ReactiveFormsModule, InputTextModule, InputNumberModule, SelectModule, DatePickerModule],
+  imports: [ReactiveFormsModule, InputTextModule, InputNumberModule, SelectModule, DatePickerModule, ButtonModule],
     viewProviders: [
     { provide: ControlContainer, useFactory: () => inject(ControlContainer, { skipSelf: true }) }
   ],

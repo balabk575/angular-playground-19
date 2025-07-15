@@ -5,7 +5,8 @@ import { delay, interval, Observable, of, Subject, takeUntil, tap, timeout } fro
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+
 })
 export class PRCreationService {
 
@@ -19,7 +20,8 @@ export class PRCreationService {
     estimatedTotal: 1499.50,
     deliveryDate: new Date('2024-01-15'),
     costCenter: 'IT-Dept',
-    justification: 'Replacement for outdated office equipment'
+    justification: 'Replacement for outdated office equipment',
+    
   },
   employeeInfo: {
     employeeId: 4567,

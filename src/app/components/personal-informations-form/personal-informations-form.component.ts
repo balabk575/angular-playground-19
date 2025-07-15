@@ -43,11 +43,12 @@ import { PrFormFacade } from '../../store/pr-form/pr-form.facade';
   ],
   templateUrl: './personal-informations-form.component.html',
   styleUrl: './personal-informations-form.component.scss',
+  
 })
 export class PersonalInformationsFormComponent {
   parentContainer = inject(ControlContainer);
   priorityLookUp: Priority[] = ['low', 'Medium', 'high'];
-  
+
   personalInformationFormFields: FormAttributes[] = [
   {
     formControlName: 'employeeId',

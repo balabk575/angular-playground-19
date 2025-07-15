@@ -83,6 +83,20 @@ export class LineItemFormComponent {
     default: '',
     isRequired: true,
     label: 'Justification'
+  },
+  {
+    label: 'add',
+    isRequired: false,
+    formControlName: 'btn',
+    formControlType: 'Button',
+    default:'',
+    button:{
+      text: 'add',
+      icon: 'pi pi-plus',
+      action: ()=>{
+        this.onAddLineItem()
+      },
+    }
   }
 ];
   
@@ -93,7 +107,6 @@ export class LineItemFormComponent {
     private PRFormService: PRCreationService,
     private controlDir: FormGroupDirective,
     private prFormFacade: PrFormFacade
-
   ) {
     this.formData$ = this.prFormFacade.formData$;
   }
@@ -108,6 +121,10 @@ export class LineItemFormComponent {
     );
     this.PRFormService.subscribeAndPatchForm(this.parentFormGroup, this.formData$, this.destroy$, 'lineItem')
 
+  }
+
+  onAddLineItem(){
+    console.log(this.parentFormGroup.get('lineItem')?.value);
   }
 
     ngOnDestroy(): void {

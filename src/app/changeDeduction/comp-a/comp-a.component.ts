@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   HostBinding,
   HostListener,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { CompBComponent } from '../comp-b/comp-b.component';
@@ -34,7 +36,16 @@ export class CompAComponent {
 
   @ViewChild(CompBComponent) child!: CompBComponent
 
-  ngOnInit() {}
+  
+  count = signal(0)
+  double = computed(()=> this.count() * 2)
+
+  ngOnInit() {
+    this.count.set(5)
+    setTimeout(() => {
+      this.count.update(prv => prv + 10)
+    }, 3000);
+  }
 
   changeName() {
     this.userData.name = 'raghul';  

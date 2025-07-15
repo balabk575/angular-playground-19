@@ -1,9 +1,15 @@
-    <header >
+    <!-- <header >
         <ng-content select="[header]"></ng-content>
     </header>
     <p>{{ userData.name }}</p>
     <ng-content></ng-content>
     <footer>
         <ng-content select="[footer]"></ng-content>
-    </footer>
+    </footer> -->
     
+     <input
+     appDebounce
+     (debounced)="getInputValue($event)"
+          placeholder="type here"
+          pInputText
+        />
