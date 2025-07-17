@@ -5,7 +5,7 @@ import {
   FormGroupDirective,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { FormAttributes, PRFormDetails } from '../../models/PR form/personalDetails.model';
+import { FormAttributes, PRFormDetails } from '../../models/PR form/pr-creation';
 import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';

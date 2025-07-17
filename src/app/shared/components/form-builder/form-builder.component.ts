@@ -1,6 +1,6 @@
 import { Component, inject, Input, SkipSelf } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { FormAttributes } from '../../../features/pr-creation/models/PR form/personalDetails.model';
+import { FormAttributes } from '../../../features/pr-creation/models/PR form/pr-creation';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';

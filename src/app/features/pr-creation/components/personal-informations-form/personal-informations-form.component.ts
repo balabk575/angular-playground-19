@@ -12,7 +12,7 @@ import {
   FormAttributes,
   PRFormDetails,
   Priority,
-} from '../../models/PR form/personalDetails.model';
+} from '../../models/PR form/pr-creation';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';

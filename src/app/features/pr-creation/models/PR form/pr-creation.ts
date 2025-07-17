@@ -47,3 +47,9 @@ export type FormAttributes =
     priority: Priority;
   };
 }
+
+export interface ErrorDetails {
+  message: string;
+  code?: number;
+  details?: any;
+}

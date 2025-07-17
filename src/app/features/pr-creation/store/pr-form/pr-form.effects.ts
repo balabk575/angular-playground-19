@@ -5,6 +5,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import * as PrFormActions from './pr-form.action'; // assuming actions are in the same folder
 import { PRCreationService } from '../../services/pr-creation.service';
+import { PRFormDetails } from '../../models/PR form/pr-creation';
 
 @Injectable()
 export class PrFormEffects {
@@ -16,7 +17,7 @@ export class PrFormEffects {
       ofType(PrFormActions.loadForm),
       switchMap(() =>
         this.prFormService.dummyFormValue().pipe(
-          map(data => PrFormActions.loadFormSuccess({ data })),
+          map((data: PRFormDetails) => PrFormActions.loadFormSuccess({ data })),
           tap( data => console.log(data)
           ),
           catchError(error => of(PrFormActions.loadFormFailure({ error })))

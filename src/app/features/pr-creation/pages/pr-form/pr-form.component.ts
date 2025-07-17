@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import {
   FormAttributes,
   Priority,
-} from '../../models/PR form/personalDetails.model';
+} from '../../models/PR form/pr-creation';
 import { PrFormResolverService } from '../../services/resolvers/pr-form-resolver.service';
 import { PRCreationService } from '../../services/pr-creation.service';
 import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';

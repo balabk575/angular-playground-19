@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormAttributes, PRFormDetails } from '../models/PR form/personalDetails.model';
+import { FormAttributes, PRFormDetails } from '../models/PR form/pr-creation';
 import { FormControl, FormGroup } from '@angular/forms';
 import { delay, interval, Observable, of, Subject, takeUntil, tap, timeout } from 'rxjs';
 
